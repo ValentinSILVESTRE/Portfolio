@@ -84,6 +84,15 @@ Nommage des branches au format `type/description`, avec les mêmes préfixes que
 - `chore/...` — tâche technique
 - `docs/...` — documentation
 
+### Protection de la branche `main`
+
+La branche `main` est protégée sur GitHub par un ruleset (*Settings → Rules → Rulesets*) :
+
+- **Restrict deletions** — `main` ne peut pas être supprimée
+- **Block force pushes** — l'historique de `main` ne peut pas être réécrit
+- **Require a pull request before merging** — aucun push direct, `develop` est fusionnée dans `main` via une Pull
+  Request (0 approbation requise, GitHub n'autorisant pas l'approbation de sa propre PR)
+
 ### Commits — Conventional Commits
 
 Ce projet suit la convention [Conventional Commits](https://www.conventionalcommits.org/) :

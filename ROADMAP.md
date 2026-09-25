@@ -11,6 +11,8 @@ Dernière mise à jour : 25/09/26
     - Ajout d'un `CLAUDE.md` décrivant le projet et les règles de travail pour Claude Code
     - Ajout d'un `.editorconfig` pour uniformiser le formatage entre éditeurs
     - Versionnement du `.gitattributes` (normalisation des fins de ligne en `LF`)
+    - Mise en place du workflow par Pull Request vers `develop` (procédure documentée dans `CLAUDE.md`)
+    - Protection de la branche `main` sur GitHub via un ruleset
 
 - **18/09/26**
     - Mise en place de la ROADMAP
