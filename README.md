@@ -52,6 +52,16 @@ Pour déployer manuellement :
 npx wrangler deploy
 ```
 
+Les autres branches (dont `develop`) sont publiées en aperçu Worker (Preview) à chaque push, sans toucher à la
+production. Chaque branche dispose de son propre aperçu, nommé d'après la branche, dont l'URL est indiquée dans le
+détail du build sur Cloudflare.
+
+Pour créer ou mettre à jour manuellement l'aperçu de la branche courante :
+
+```bash
+npx wrangler preview
+```
+
 Pour recompiler le CSS après une modification de `style.scss` :
 
 ```bash

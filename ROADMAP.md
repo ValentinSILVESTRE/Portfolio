@@ -13,6 +13,7 @@ Dernière mise à jour : 25/09/26
     - Versionnement du `.gitattributes` (normalisation des fins de ligne en `LF`)
     - Mise en place du workflow par Pull Request vers `develop` (procédure documentée dans `CLAUDE.md`)
     - Protection de la branche `main` sur GitHub via un ruleset
+    - Mise en place des aperçus Worker (Preview) pour la branche `develop`
 
 - **18/09/26**
     - Mise en place de la ROADMAP
