@@ -1,10 +1,16 @@
 # Suivi du projet — Portfolio Valentin Silvestre
 
-Dernière mise à jour : 18/09/26
+Dernière mise à jour : 25/09/26
 
 ## 🚧 En développement
 
 ## ✅ Fait
+
+- **25/09/26**
+    - Installation de Claude Code dans le terminal de PhpStorm
+    - Ajout d'un `CLAUDE.md` décrivant le projet et les règles de travail pour Claude Code
+    - Ajout d'un `.editorconfig` pour uniformiser le formatage entre éditeurs
+    - Versionnement du `.gitattributes` (normalisation des fins de ligne en `LF`)
 
 - **18/09/26**
     - Mise en place de la ROADMAP
@@ -20,7 +26,6 @@ Dernière mise à jour : 18/09/26
 
 ## 🔜 À venir
 
-- [ ] Installation de Claude Code dans l'ide PHPStorm
 - [ ] Mettre en ligne l'ancien Portfolio sur un sous-domaine
 - [ ] Remplacer la landing page temporaire par l'ancien portfolio
 - [ ] Mettre en place la redirection `www.valentinsilvestre.com` → `valentinsilvestre.com`

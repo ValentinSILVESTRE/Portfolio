@@ -35,6 +35,9 @@ Développement du portfolio complet (React + Symfony) à venir, voir [ROADMAP.md
 ├── style.scss      # Source Sass des styles
 ├── style.css       # CSS compilé (généré depuis style.scss)
 ├── wrangler.jsonc  # Configuration du déploiement Cloudflare Workers
+├── .editorconfig   # Règles de formatage partagées entre éditeurs
+├── .gitattributes  # Traitement des fichiers par Git (fins de ligne, diff, export…)
+├── CLAUDE.md       # Contexte et règles de travail pour Claude Code
 ├── ROADMAP.md      # Suivi détaillé de l'avancement
 └── README.md       # Détails du projet
 ```
@@ -99,3 +102,8 @@ terminent par un saut de ligne. S'il manque, il est ajouté et le fichier est re
 
 Un fichier `.gitattributes` normalise également les fins de ligne en `LF` pour tout le projet, quel que soit
 l'OS utilisé pour éditer.
+
+### Formatage — EditorConfig
+
+Un fichier `.editorconfig` définit les règles de formatage communes (encodage, indentation, saut de ligne final),
+reconnues nativement par PhpStorm, VS Code et la plupart des éditeurs.
