@@ -7,6 +7,9 @@ Le [README.md](./README.md) décrit le projet, la stack et les conventions ; [RO
 
 - État actuel : une landing page statique « Bientôt disponible » (`index.html` + `style.scss`) déployée sur
   Cloudflare Workers (static assets, `wrangler.jsonc`).
+- Environnements : production sur [valentinsilvestre.com](https://valentinsilvestre.com), développement (aperçu Worker
+  de la branche `develop`) sur
+  [develop-portfolio.valentin-silvestre.workers.dev](https://develop-portfolio.valentin-silvestre.workers.dev/).
 - Cible : frontend React (Cloudflare Workers) + API Symfony avec PostgreSQL (Clever Cloud), Docker à venir.
 - L'objectif du projet est aussi pédagogique : privilégier les pratiques standards de l'écosystème et expliquer
   les choix plutôt qu'appliquer des raccourcis.
