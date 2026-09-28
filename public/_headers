@@ -1,0 +1,6 @@
+# En-têtes HTTP appliqués par Cloudflare Workers aux fichiers de public/ (ce fichier n'est pas publié lui-même).
+# https://developers.cloudflare.com/workers/static-assets/headers/
+
+# Aperçus et préproduction (*.workers.dev) : ne pas indexer, seul valentinsilvestre.com doit apparaître dans Google
+https://:version.:subdomain.workers.dev/*
+    X-Robots-Tag: noindex

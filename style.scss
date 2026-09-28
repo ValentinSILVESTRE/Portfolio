@@ -1,227 +1,449 @@
-// Variables — thème clair/sombre
-$bg-dark: #0f1115;
-$bg-alt-dark: #15181f;
-$text-dark: #f2f3f5;
-$text-dim-dark: #9aa0ab;
-$accent-dark: #6c8cff;
-$border-dark: rgba(255, 255, 255, 0.08);
+// =============================================================================
+// Page d'accueil — valentinsilvestre.com
+//
+// Sommaire
+//   1. Réglages        couleurs des thèmes, tailles, points de rupture
+//   2. Outils          fonction et mixins réutilisés dans le fichier
+//   3. Thèmes          variables CSS pour le thème clair (défaut) et sombre
+//   4. Base            box-sizing, fond et typographie de la page
+//   5. En-tête         nom, rôle, phrase d'introduction
+//   6. Mise en page    conteneur et grille des deux cartes
+//   7. Carte 2022      capture du portfolio 2022 dans un cadre de navigateur
+//   8. Carte avancement  barre de progression et liste des étapes
+//   9. Pied de page    liens de contact et copyright
+//
+// Ordre des propriétés dans chaque règle :
+//   position → affichage → dimensions → espacements → bordure → fond → texte → effets
+// =============================================================================
 
-$bg-light: #f7f8fa;
-$bg-alt-light: #ffffff;
-$text-light: #14161a;
-$text-dim-light: #5a6472;
-$accent-light: #3b5fe0;
-$border-light: rgba(0, 0, 0, 0.08);
 
-:root {
-  --bg: #{$bg-dark};
-  --bg-alt: #{$bg-alt-dark};
-  --text: #{$text-dark};
-  --text-dim: #{$text-dim-dark};
-  --accent: #{$accent-dark};
-  --border: #{$border-dark};
+// -----------------------------------------------------------------------------
+// 1. Réglages
+// -----------------------------------------------------------------------------
+
+// Chaque thème liste ses couleurs ; elles deviennent des variables CSS (--bg, --text…) en section 3.
+// accent = bleu (liens, mise en avant) ; accent-2 = bleu-vert (étapes terminées).
+$theme-light: (
+  bg: #f7f8fa,
+  bg-alt: #ffffff,
+  text: #14161a,
+  text-dim: #5a6472,
+  accent: #3b5fe0,
+  accent-2: #0f8f7c,
+  border: rgba(0, 0, 0, 0.08),
+);
+
+$theme-dark: (
+  bg: #0f1115,
+  bg-alt: #15181f,
+  text: #f2f3f5,
+  text-dim: #9aa0ab,
+  accent: #6c8cff,
+  accent-2: #3ec9b0,
+  border: rgba(255, 255, 255, 0.08),
+);
+
+$breakpoint-narrow: 600px; // en dessous (téléphones) : marges latérales réduites
+$breakpoint-wide: 960px; // au-delà : les deux cartes passent côte à côte
+$radius-card: 14px;
+$radius-pill: 999px;
+$gradient-accent: linear-gradient(90deg, var(--accent), var(--accent-2));
+
+
+// -----------------------------------------------------------------------------
+// 2. Outils
+// -----------------------------------------------------------------------------
+
+// Couleur du thème rendue semi-transparente : tinted(accent, 15%) = 15 % de --accent.
+@function tinted($color, $amount, $base: transparent) {
+  @return color-mix(in srgb, var(--#{$color}) $amount, $base);
 }
 
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    --bg: #{$bg-light};
-    --bg-alt: #{$bg-alt-light};
-    --text: #{$text-light};
-    --text-dim: #{$text-dim-light};
-    --accent: #{$accent-light};
-    --border: #{$border-light};
+// Déclare les variables CSS d'un thème.
+@mixin theme($theme) {
+  @each $name, $value in $theme {
+    --#{$name}: #{$value};
+  }
+}
+
+// Lien en couleur d'accent, souligné uniquement au survol.
+@mixin accent-link {
+  color: var(--accent);
+  font-weight: 500;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Carte : bordure fine, coins arrondis, fond légèrement plus clair que la page.
+@mixin card {
+  border: 1px solid var(--border);
+  border-radius: $radius-card;
+  background: var(--bg-alt);
+}
+
+
+// -----------------------------------------------------------------------------
+// 3. Thèmes
+// -----------------------------------------------------------------------------
+
+// Clair par défaut, sombre si l'appareil du visiteur est réglé en mode sombre.
+// L'attribut data-theme sur <html> force un thème ("light" ou "dark"), quel que soit le réglage de l'appareil.
+:root {
+  @include theme($theme-light);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    @include theme($theme-dark);
   }
 }
 
 :root[data-theme="dark"] {
-  --bg: #{$bg-dark};
-  --bg-alt: #{$bg-alt-dark};
-  --text: #{$text-dark};
-  --text-dim: #{$text-dim-dark};
-  --accent: #{$accent-dark};
-  --border: #{$border-dark};
+  @include theme($theme-dark);
 }
+
+
+// -----------------------------------------------------------------------------
+// 4. Base
+// -----------------------------------------------------------------------------
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
-  background: radial-gradient(circle at 30% 20%, var(--bg-alt), var(--bg) 70%);
-  color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
-  "Apple Color Emoji", "Segoe UI Emoji";
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 100vh;
+  margin: 0;
   padding: 24px;
+
+  @media (max-width: $breakpoint-narrow) {
+    padding: 16px;
+  }
+  // Deux halos très diffus (bleu en haut à gauche, bleu-vert en bas à droite) sur le fond de la page
+  background:
+    radial-gradient(circle at 15% 10%, tinted(accent, 16%), transparent 45%),
+    radial-gradient(circle at 85% 90%, tinted(accent-2, 12%), transparent 45%),
+    radial-gradient(circle at 30% 20%, var(--bg-alt), var(--bg) 70%);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji";
 }
 
-.card {
-  max-width: 560px;
-  width: 100%;
-  text-align: center;
-  padding: 48px 32px;
-}
 
-.badge {
-  display: inline-block;
-  padding: 6px 16px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  font-size: 13px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 28px;
-}
+// -----------------------------------------------------------------------------
+// 5. En-tête
+// -----------------------------------------------------------------------------
 
 h1 {
-  font-size: clamp(28px, 5vw, 42px);
   margin: 0 0 12px;
+  // Nom en dégradé discret, de la couleur du texte vers l'accent
+  background: linear-gradient(90deg, var(--text) 30%, var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: clamp(28px, 5vw, 42px);
   font-weight: 700;
   letter-spacing: -0.02em;
 }
 
-p.subtitle {
+.role {
+  margin: 0 0 20px;
+  color: var(--accent);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.subtitle {
+  margin: 0 0 36px;
   color: var(--text-dim);
   font-size: 17px;
   line-height: 1.6;
-  margin: 0 0 36px;
 }
 
-.cta {
-  display: inline-block;
-  margin: -12px 0 36px;
-  padding: 10px 22px;
-  border: 1px solid var(--accent);
-  border-radius: 999px;
-  color: var(--accent);
-  font-size: 15px;
-  font-weight: 500;
-  text-decoration: none;
-  transition: background-color 0.2s, color 0.2s;
 
+// -----------------------------------------------------------------------------
+// 6. Mise en page
+// -----------------------------------------------------------------------------
+
+.card {
+  width: 100%;
+  max-width: 560px;
+  padding: 48px 32px;
+  text-align: center;
+
+  @media (max-width: $breakpoint-narrow) {
+    padding: 32px 0;
+  }
+
+  @media (min-width: $breakpoint-wide) {
+    max-width: 1080px;
+  }
+}
+
+// Les deux cartes : empilées, puis côte à côte et de même hauteur sur grand écran
+// minmax(0, …) : une colonne ne s'élargit jamais au-delà de l'écran, même si son contenu est large
+.panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+
+  @media (min-width: $breakpoint-wide) {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: 28px;
+    align-items: stretch;
+  }
+}
+
+
+// -----------------------------------------------------------------------------
+// 7. Carte 2022
+// -----------------------------------------------------------------------------
+
+.showcase {
+  @include card;
+  display: block;
+  overflow: hidden;
+  color: inherit;
+  text-align: left;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+
+  // Au survol : la carte se soulève et sa bordure prend la couleur d'accent
   &:hover,
   &:focus-visible {
-    background: var(--accent);
-    color: var(--bg);
-  }
-}
+    border-color: var(--accent);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35);
+    transform: translateY(-3px);
 
-.dots {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 36px;
-
-  .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--accent);
-    opacity: 0.3;
-    animation: pulse 1.4s infinite ease-in-out;
-
-    &:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    &:nth-child(3) {
-      animation-delay: 0.4s;
-    }
-  }
-}
-
-@keyframes pulse {
-  0%, 80%, 100% {
-    opacity: 0.25;
-    transform: scale(1);
-  }
-  40% {
-    opacity: 1;
-    transform: scale(1.3);
-  }
-}
-
-.contact {
-  font-size: 14px;
-  color: var(--text-dim);
-
-  a {
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: 500;
-
-    &:hover {
+    .showcase-link {
       text-decoration: underline;
     }
   }
 }
 
+// Cadre de navigateur : barre avec trois points et l'adresse, puis la capture
+.showcase-frame {
+  display: block;
+  border-bottom: 1px solid var(--border);
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.showcase-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--bg);
+
+  // Les trois points de la fenêtre
+  > span:not(.showcase-url) {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--text-dim);
+    opacity: 0.4;
+  }
+}
+
+.showcase-url {
+  margin-left: 8px;
+  color: var(--text-dim);
+  font-size: 11px;
+}
+
+// Texte sous la capture
+.showcase-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 20px 18px;
+}
+
+.showcase-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.showcase-text {
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.showcase-link {
+  margin-top: 4px;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+
+// -----------------------------------------------------------------------------
+// 8. Carte avancement
+// -----------------------------------------------------------------------------
+
 .progress {
-  margin-top: 40px;
-  padding-top: 28px;
-  border-top: 1px solid var(--border);
+  @include card;
+  padding: 22px 22px 18px;
   text-align: left;
 
-  &-title {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-dim);
-    margin: 0 0 14px;
-    text-align: center;
-  }
-
-  &-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  // Sur grand écran, le lien GitHub se cale en bas de la carte
+  @media (min-width: $breakpoint-wide) {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+  }
+}
 
-    li {
-      position: relative;
-      padding-left: 26px;
-      font-size: 14px;
-      color: var(--text-dim);
+.progress-title {
+  margin: 0 0 10px;
+  color: var(--text-dim);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
 
-      &::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 3px;
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
-        border: 1.5px solid var(--text-dim);
-        opacity: 0.5;
-      }
+// Barre de progression — largeur de remplissage définie dans index.html
+.progress-bar {
+  overflow: hidden;
+  height: 6px;
+  margin-bottom: 20px;
+  border-radius: $radius-pill;
+  background: var(--border);
 
-      &.done {
-        color: var(--text);
+  span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: $gradient-accent;
+  }
+}
 
-        &::before {
-          background: var(--accent);
-          border-color: var(--accent);
-          opacity: 1;
-        }
-      }
+// Liste des étapes : libellé à gauche, technos à droite
+.progress-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 
-      a {
-        color: var(--accent);
-        text-decoration: none;
-        font-weight: 500;
+  li {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px 12px;
+    padding-left: 28px;
+    color: var(--text-dim);
+    font-size: 14px;
+    line-height: 20px;
+  }
 
-        &:hover {
-          text-decoration: underline;
-        }
-      }
+  a.step {
+    @include accent-link;
+  }
+}
+
+// Pastilles devant chaque étape : cercle vide (à venir), coche (fait), point (prochaine étape).
+// 16px, centrées sur la première ligne de 20px.
+// box-sizing répété car la règle `*` ne s'applique pas aux pseudo-éléments.
+.progress-list li {
+  &::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 0;
+    box-sizing: border-box;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--text-dim);
+    border-radius: 50%;
+    opacity: 0.45;
+  }
+
+  // Étape terminée : pastille pleine bleu-vert + coche
+  &.done {
+    color: var(--text);
+
+    &::before {
+      border-color: var(--accent-2);
+      background: var(--accent-2);
+      opacity: 1;
     }
+
+    // Coche dessinée en CSS : un « L » tourné de 45°
+    &::after {
+      content: "";
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      box-sizing: border-box;
+      width: 6px;
+      height: 9px;
+      border: solid var(--bg);
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+  }
+
+  // Prochaine étape : anneau bleu avec un point au centre + badge « Prochaine étape »
+  &.next {
+    color: var(--text);
+
+    &::before {
+      border-color: var(--accent);
+      box-shadow: inset 0 0 0 3px var(--bg-alt), inset 0 0 0 8px var(--accent);
+      opacity: 1;
+    }
+
+    .step::after {
+      content: "Prochaine étape";
+      margin-left: 8px;
+      padding: 2px 8px;
+      border-radius: $radius-pill;
+      background: tinted(accent, 15%);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 16px;
+    }
+  }
+}
+
+// Technos : pastilles teintées selon l'état de l'étape (neutre, bleu-vert si faite, bleu si prochaine)
+.tags {
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: tinted(text-dim, 12%);
+  color: var(--text-dim);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+
+  .done > & {
+    background: tinted(accent-2, 14%);
+    color: var(--accent-2);
+  }
+
+  .next > & {
+    background: tinted(accent, 14%);
+    color: var(--accent);
   }
 }
 
@@ -231,19 +453,33 @@ p.subtitle {
   text-align: center;
 
   a {
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: 500;
+    @include accent-link;
+  }
 
-    &:hover {
-      text-decoration: underline;
-    }
+  @media (min-width: $breakpoint-wide) {
+    margin-top: auto;
+    padding-top: 18px;
+  }
+}
+
+
+// -----------------------------------------------------------------------------
+// 9. Pied de page
+// -----------------------------------------------------------------------------
+
+.contact {
+  margin: 40px 0 0;
+  color: var(--text-dim);
+  font-size: 14px;
+
+  a {
+    @include accent-link;
   }
 }
 
 footer {
-  margin-top: 44px;
-  font-size: 12px;
+  margin-top: 16px;
   color: var(--text-dim);
+  font-size: 12px;
   opacity: 0.6;
 }
