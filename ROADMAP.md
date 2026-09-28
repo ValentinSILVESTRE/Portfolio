@@ -1,10 +1,13 @@
 # Suivi du projet — Portfolio Valentin Silvestre
 
-Dernière mise à jour : 25/09/26
+Dernière mise à jour : 28/09/26
 
 ## 🚧 En développement
 
 ## ✅ Fait
+
+- **28/09/26**
+    - Mise en place de la redirection `www.valentinsilvestre.com` → `valentinsilvestre.com`
 
 - **25/09/26**
     - Installation de Claude Code dans le terminal de PhpStorm
@@ -31,7 +34,6 @@ Dernière mise à jour : 25/09/26
 
 - [ ] Mettre en ligne l'ancien Portfolio sur un sous-domaine
 - [ ] Remplacer la landing page temporaire par l'ancien portfolio
-- [ ] Mettre en place la redirection `www.valentinsilvestre.com` → `valentinsilvestre.com`
 - [ ] Développer le nouveau Portfolio
 - [ ] Mettre en ligne le nouveau Portfolio
 - [ ] Remplacer la landing page par le nouveau portfolio

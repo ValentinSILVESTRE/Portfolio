@@ -73,6 +73,11 @@ npx sass style.scss style.css --style=expanded --no-source-map
 - Production : [valentinsilvestre.com](https://valentinsilvestre.com)
 - Développement : [develop-portfolio.valentin-silvestre.workers.dev](https://develop-portfolio.valentin-silvestre.workers.dev/)
 
+`www.valentinsilvestre.com` redirige vers `valentinsilvestre.com` (301, chemin et paramètres conservés), via une
+Redirect Rule Cloudflare (*Rules → Redirect Rules*) appliquée avant le Worker. Le sous-domaine `www` pointe vers un
+enregistrement DNS `AAAA` proxifié vers `100::`, une adresse factice qui permet à Cloudflare d'intercepter la
+requête.
+
 ## 📝 Conventions
 
 Ce projet suit des méthodologies reconnues plutôt que des règles maison, pour rester lisible par n'importe quel
