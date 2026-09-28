@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <title>Valentin SILVESTRE — Développeur web</title>
+        <meta content="Valentin SILVESTRE, développeur web. Découvrez mon portfolio 2022 et suivez l'avancement de mon nouveau portfolio en React et Symfony."
+              name="description">
+        <link href="https://valentinsilvestre.com/" rel="canonical">
+
+        <!-- Aperçu lors d'un partage (LinkedIn, Facebook, messageries…) -->
+        <meta content="website" property="og:type">
+        <meta content="fr_FR" property="og:locale">
+        <meta content="Valentin SILVESTRE" property="og:site_name">
+        <meta content="https://valentinsilvestre.com/" property="og:url">
+        <meta content="Valentin SILVESTRE — Développeur web" property="og:title">
+        <meta content="Découvrez mon portfolio 2022 et suivez l'avancement de mon nouveau portfolio en React et Symfony."
+              property="og:description">
+        <meta content="https://valentinsilvestre.com/images/og-image.jpg" property="og:image">
+        <meta content="1200" property="og:image:width">
+        <meta content="630" property="og:image:height">
+        <meta content="Page d'accueil de Valentin SILVESTRE : portfolio 2022 et avancement du nouveau portfolio"
+              property="og:image:alt">
+        <meta content="summary_large_image" name="twitter:card">
+
+        <!-- Couleur de la barre du navigateur sur mobile, selon le thème -->
+        <meta content="#0f1115" media="(prefers-color-scheme: dark)" name="theme-color">
+        <meta content="#f7f8fa" media="(prefers-color-scheme: light)" name="theme-color">
+
+        <link href="favicon.ico" rel="icon" type="image/x-icon">
+        <link href="style.css" rel="stylesheet">
+
+        <!-- Données structurées : présente la personne aux moteurs de recherche (https://schema.org/Person) -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "Person",
+                "name": "Valentin SILVESTRE",
+                "jobTitle": "Développeur web",
+                "url": "https://valentinsilvestre.com/",
+                "sameAs": [
+                    "https://github.com/ValentinSILVESTRE",
+                    "https://gitlab.com/ValentinSILVESTRE",
+                    "https://www.linkedin.com/in/valentin-silvestre1/"
+                ]
+            }
+        </script>
+    </head>
+    <body>
+        <div class="card">
+            <h1>Valentin SILVESTRE</h1>
+            <p class="role">Développeur web</p>
+            <p class="subtitle">
+                Ce portfolio, développé avec React et Symfony, sera bientôt en ligne.
+            </p>
+
+            <!-- Empilés sur mobile, côte à côte sur grand écran (portfolio 2022 à gauche, avancement à droite) -->
+            <div class="panels">
+                <a class="showcase" href="https://2022.valentinsilvestre.com">
+                    <span class="showcase-frame">
+                        <span class="showcase-bar">
+                            <span></span><span></span><span></span>
+                            <span class="showcase-url">2022.valentinsilvestre.com</span>
+                        </span>
+                        <img alt="Page d'accueil du portfolio 2022 avec la liste des projets" height="800"
+                             src="images/portfolio-2022.webp" width="1280">
+                    </span>
+                    <span class="showcase-body">
+                        <span class="showcase-title">En attendant le nouveau, voici mon portfolio de 2022</span>
+                        <span class="showcase-text">
+                            Angular · Taquin, Puissance 4, Démineur, Jeu de la vie et d'autres projets jouables
+                        </span>
+                        <span class="showcase-link">Visiter →</span>
+                    </span>
+                </a>
+
+                <div class="progress">
+                    <p class="progress-title">Avancement du nouveau portfolio</p>
+                    <!-- Largeur à mettre à jour selon le nombre d'étapes « done » : 5 sur 8 = 62,5 % -->
+                    <div aria-label="Avancement : 5 étapes sur 8" aria-valuemax="8" aria-valuemin="0" aria-valuenow="5"
+                         class="progress-bar" role="progressbar">
+                        <span style="width: 62.5%"></span>
+                    </div>
+                    <ul class="progress-list">
+                        <li class="done">
+                            <span class="step">Nom de domaine et hébergement</span>
+                            <span class="tags">Cloudflare Workers</span>
+                        </li>
+                        <li class="done">
+                            <span class="step">Page d'accueil</span>
+                            <span class="tags">HTML · Sass</span>
+                        </li>
+                        <li class="done">
+                            <span class="step">Workflow Git et aperçus automatiques</span>
+                            <span class="tags">GitHub Flow · Pull Requests</span>
+                        </li>
+                        <li class="done">
+                            <a class="step" href="https://develop-portfolio.valentin-silvestre.workers.dev/"
+                               rel="noopener" target="_blank">Environnement de préproduction</a>
+                            <span class="tags">Worker Preview</span>
+                        </li>
+                        <li class="done">
+                            <a class="step" href="https://2022.valentinsilvestre.com">Portfolio 2022 remis en ligne</a>
+                            <span class="tags">Angular</span>
+                        </li>
+                        <li class="next">
+                            <span class="step">Interface du nouveau portfolio</span>
+                            <span class="tags">React</span>
+                        </li>
+                        <li>
+                            <span class="step">API et base de données</span>
+                            <span class="tags">Symfony · PostgreSQL</span>
+                        </li>
+                        <li>
+                            <span class="step">Mise en production du portfolio complet</span>
+                            <span class="tags">Clever Cloud · Docker · CI/CD</span>
+                        </li>
+                    </ul>
+                    <p class="repo-link">
+                        <a href="https://github.com/ValentinSILVESTRE/Portfolio" rel="noopener" target="_blank">Voir le
+                            projet sur GitHub →</a>
+                    </p>
+                </div>
+            </div>
+
+            <p class="contact">
+                Retrouvez-moi sur
+                <a href="https://github.com/ValentinSILVESTRE/" rel="noopener" target="_blank">GitHub</a>,
+                <a href="https://gitlab.com/ValentinSILVESTRE" rel="noopener" target="_blank">GitLab</a>
+                et
+                <a href="https://www.linkedin.com/in/valentin-silvestre1/" rel="noopener" target="_blank">LinkedIn</a>.
+            </p>
+
+            <footer>© 2026 Valentin SILVESTRE</footer>
+        </div>
+    </body>
+</html>

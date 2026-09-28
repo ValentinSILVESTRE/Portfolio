@@ -2,6 +2,8 @@
   "name": "portfolio",
   "compatibility_date": "2026-09-16",
   "assets": {
-    "directory": "."
-  }
+    // Seul le dossier public/ est publié : les fichiers du projet (README, CLAUDE.md, sources Sass…) restent privés
+    "directory": "./public"
+  },
+  "previews": {}
 }
