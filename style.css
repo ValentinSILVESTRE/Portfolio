@@ -75,6 +75,23 @@ p.subtitle {
   margin: 0 0 36px;
 }
 
+.cta {
+  display: inline-block;
+  margin: -12px 0 36px;
+  padding: 10px 22px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+.cta:hover, .cta:focus-visible {
+  background: var(--accent);
+  color: var(--bg);
+}
+
 .dots {
   display: flex;
   justify-content: center;

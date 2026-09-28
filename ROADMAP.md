@@ -13,6 +13,7 @@ Dernière mise à jour : 28/09/26
       [GitLab](https://gitlab.com/ValentinSILVESTRE/portfolio) sur un Worker Cloudflare dédié
     - Projets nécessitant l'API (Calendrier), aux fichiers manquants (Pokémon) ou hors ligne (MHB) signalés
       comme indisponibles sur l'ancien portfolio
+    - Ajout d'un lien vers l'ancien portfolio sur la landing page
 
 - **25/09/26**
     - Installation de Claude Code dans le terminal de PhpStorm
