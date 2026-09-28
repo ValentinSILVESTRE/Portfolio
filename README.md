@@ -125,14 +125,24 @@ Nommage des branches au format `type/description`, avec les mêmes préfixes que
 - `chore/...` — tâche technique
 - `docs/...` — documentation
 
-### Protection de la branche `main`
+### Protection des branches `main` et `develop`
 
-La branche `main` est protégée sur GitHub par un ruleset (*Settings → Rules → Rulesets*) :
+Les deux branches permanentes sont protégées sur GitHub par un ruleset chacune (*Settings → Rules → Rulesets*).
+
+`main` :
 
 - **Restrict deletions** — `main` ne peut pas être supprimée
 - **Block force pushes** — l'historique de `main` ne peut pas être réécrit
 - **Require a pull request before merging** — aucun push direct, `develop` est fusionnée dans `main` via une Pull
   Request (0 approbation requise, GitHub n'autorisant pas l'approbation de sa propre PR)
+
+`develop` :
+
+- **Restrict deletions** — `develop` ne peut pas être supprimée, même par erreur après la fusion d'une PR
+  `develop` → `main`
+- Pas de Pull Request obligatoire : les branches de travail validées sont fusionnées en local puis `develop` est
+  poussée directement
+- Force pushes volontairement autorisés, pour pouvoir corriger l'historique de `develop` si nécessaire
 
 ### Commits — Conventional Commits
 
@@ -144,6 +154,18 @@ Ce projet suit la convention [Conventional Commits](https://www.conventionalcomm
 - `style:` — changements visuels/CSS
 - `chore:` — tâches de maintenance
 - `docs:` — documentation
+
+### Pull Requests
+
+Chaque Pull Request porte un titre explicite et une courte description.
+
+- **Titre**
+  - Fonctionnalité ou correction (`type/...` → `develop`) : au format Conventional Commits, en anglais,
+    ex. `feat: redesign landing page with 2022 portfolio showcase`
+  - Mise en production (`develop` → `main`) : `release: vX.Y.Z`, qui devient le message du commit de fusion sur
+    `main`
+- **Description** (en français) : ce qui change, comment c'est vérifié, et ce qu'il reste à faire après la fusion
+  (vérifications, tag…)
 
 ### Versions — Semantic Versioning
 

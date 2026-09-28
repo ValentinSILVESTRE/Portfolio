@@ -33,7 +33,8 @@ Le [README.md](./README.md) décrit le projet, la stack et les conventions ; [RO
      `git switch develop && git pull && git switch -c feat/my-branch-name` ;
   2. Pousser la branche et donner le lien de création de la PR vers `develop`
      (`https://github.com/ValentinSILVESTRE/Portfolio/compare/develop...feat/my-branch-name?expand=1`) :
-     `git push -u origin feat/my-branch-name` ;
+     `git push -u origin feat/my-branch-name`, en proposant un titre et une description prêts à coller
+     (convention dans la section « Pull Requests » du `README.md`) ;
   3. Attendre que Valentin ait validé la PR sur GitHub ;
   4. Fusionner la branche dans `develop` en local, puis pousser `develop` :
      `git switch develop && git pull && git merge --ff-only feat/my-branch-name && git push origin develop` ;
@@ -45,7 +46,12 @@ Le [README.md](./README.md) décrit le projet, la stack et les conventions ; [RO
   `git switch feat/my-branch-name && git rebase develop && git push --force-with-lease`,
   puis attendre une nouvelle validation de Valentin avant de reprendre à l'étape 4. En cas de conflit pendant le
   rebase, s'arrêter et demander à Valentin comment le résoudre.
+- **`develop`** : protégée contre la suppression sur GitHub ; ne jamais la supprimer, y compris après la fusion
+  d'une PR `develop` → `main`.
 - **`main`** : ne jamais pousser sur `main`, ni directement ni par fusion — c'est la production, gérée par Valentin.
+  Pour une mise en production, donner le lien de la PR `develop` → `main`
+  (`https://github.com/ValentinSILVESTRE/Portfolio/compare/main...develop?expand=1`) avec le titre `release: vX.Y.Z`
+  et une description prête à coller.
 - **Versions** : chaque mise en production est taguée sur `main` en [Semantic Versioning](https://semver.org/lang/fr/)
   (`v1.x.y` pour la page d'accueil actuelle, `v2.0.0` pour le nouveau portfolio), voir la section « Versions » du
   `README.md`.

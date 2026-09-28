@@ -22,6 +22,8 @@ Dernière mise à jour : 28/09/26
     - Référencement : URL canonique, balises Open Graph avec image d'aperçu, données structurées, `robots.txt`,
       `sitemap.xml` et `noindex` sur les aperçus `*.workers.dev`
     - Mise en place du versionnement des mises en production (Semantic Versioning, tags Git)
+    - Convention de titre et de description des Pull Requests
+    - Protection de la branche `develop` contre la suppression (ruleset GitHub)
 
 - **25/09/26**
     - Installation de Claude Code dans le terminal de PhpStorm
