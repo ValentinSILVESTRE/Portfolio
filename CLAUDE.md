@@ -10,6 +10,8 @@ Le [README.md](./README.md) décrit le projet, la stack et les conventions ; [RO
 - Environnements : production sur [valentinsilvestre.com](https://valentinsilvestre.com), développement (aperçu Worker
   de la branche `develop`) sur
   [develop-portfolio.valentin-silvestre.workers.dev](https://develop-portfolio.valentin-silvestre.workers.dev/).
+- Ancien portfolio (Angular 13) : [2022.valentinsilvestre.com](https://2022.valentinsilvestre.com), dépôt GitLab
+  séparé (`~/development/portfolio-2022`), buildé sous Node 16 (`.nvmrc`) et déployé à la main avec Wrangler.
 - Cible : frontend React (Cloudflare Workers) + API Symfony avec PostgreSQL (Clever Cloud), Docker à venir.
 - L'objectif du projet est aussi pédagogique : privilégier les pratiques standards de l'écosystème et expliquer
   les choix plutôt qu'appliquer des raccourcis.

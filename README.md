@@ -72,6 +72,9 @@ npx sass style.scss style.css --style=expanded --no-source-map
 
 - Production : [valentinsilvestre.com](https://valentinsilvestre.com)
 - Développement : [develop-portfolio.valentin-silvestre.workers.dev](https://develop-portfolio.valentin-silvestre.workers.dev/)
+- Ancien portfolio : [2022.valentinsilvestre.com](https://2022.valentinsilvestre.com), servi par un Worker distinct
+  (Custom Domain) et déployé manuellement depuis son propre dépôt
+  [GitLab](https://gitlab.com/ValentinSILVESTRE/portfolio)
 
 `www.valentinsilvestre.com` redirige vers `valentinsilvestre.com` (301, chemin et paramètres conservés), via une
 Redirect Rule Cloudflare (*Rules → Redirect Rules*) appliquée avant le Worker. Le sous-domaine `www` pointe vers un

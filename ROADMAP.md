@@ -8,6 +8,11 @@ Dernière mise à jour : 28/09/26
 
 - **28/09/26**
     - Mise en place de la redirection `www.valentinsilvestre.com` → `valentinsilvestre.com`
+    - Mise en ligne de l'ancien portfolio (Angular 13, front uniquement) sur
+      [2022.valentinsilvestre.com](https://2022.valentinsilvestre.com), déployé depuis son dépôt
+      [GitLab](https://gitlab.com/ValentinSILVESTRE/portfolio) sur un Worker Cloudflare dédié
+    - Projets nécessitant l'API (Calendrier), aux fichiers manquants (Pokémon) ou hors ligne (MHB) signalés
+      comme indisponibles sur l'ancien portfolio
 
 - **25/09/26**
     - Installation de Claude Code dans le terminal de PhpStorm
@@ -32,7 +37,6 @@ Dernière mise à jour : 28/09/26
 
 ## 🔜 À venir
 
-- [ ] Mettre en ligne l'ancien Portfolio sur un sous-domaine
 - [ ] Remplacer la landing page temporaire par l'ancien portfolio
 - [ ] Développer le nouveau Portfolio
 - [ ] Mettre en ligne le nouveau Portfolio
