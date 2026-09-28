@@ -14,6 +14,14 @@ Dernière mise à jour : 28/09/26
     - Projets nécessitant l'API (Calendrier), aux fichiers manquants (Pokémon) ou hors ligne (MHB) signalés
       comme indisponibles sur l'ancien portfolio
     - Ajout d'un lien vers l'ancien portfolio sur la landing page
+    - Refonte de la page d'accueil : carte de présentation du portfolio 2022 avec capture, carte d'avancement,
+      mise en page sur deux colonnes pour les grands écrans
+    - Réorganisation du fichier `style.scss` (sections, variables de thème, mixins)
+    - Publication limitée au dossier `public/` : les fichiers du projet (README, CLAUDE.md, sources…) ne sont plus
+      accessibles en ligne
+    - Référencement : URL canonique, balises Open Graph avec image d'aperçu, données structurées, `robots.txt`,
+      `sitemap.xml` et `noindex` sur les aperçus `*.workers.dev`
+    - Mise en place du versionnement des mises en production (Semantic Versioning, tags Git)
 
 - **25/09/26**
     - Installation de Claude Code dans le terminal de PhpStorm

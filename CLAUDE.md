@@ -5,8 +5,10 @@ Le [README.md](./README.md) décrit le projet, la stack et les conventions ; [RO
 
 ## Contexte
 
-- État actuel : une landing page statique « Bientôt disponible » (`index.html` + `style.scss`) déployée sur
-  Cloudflare Workers (static assets, `wrangler.jsonc`).
+- État actuel (`v1`) : une page d'accueil statique qui présente le portfolio 2022 et l'avancement du nouveau
+  portfolio, déployée sur Cloudflare Workers (static assets, `wrangler.jsonc`).
+- Seul le dossier `public/` est publié (`index.html`, `style.css`, `images/`, `robots.txt`, `sitemap.xml`,
+  `_headers`…). Tout le reste (sources Sass, documentation, configuration) doit rester hors de `public/`.
 - Environnements : production sur [valentinsilvestre.com](https://valentinsilvestre.com), développement (aperçu Worker
   de la branche `develop`) sur
   [develop-portfolio.valentin-silvestre.workers.dev](https://develop-portfolio.valentin-silvestre.workers.dev/).
@@ -44,19 +46,35 @@ Le [README.md](./README.md) décrit le projet, la stack et les conventions ; [RO
   puis attendre une nouvelle validation de Valentin avant de reprendre à l'étape 4. En cas de conflit pendant le
   rebase, s'arrêter et demander à Valentin comment le résoudre.
 - **`main`** : ne jamais pousser sur `main`, ni directement ni par fusion — c'est la production, gérée par Valentin.
+- **Versions** : chaque mise en production est taguée sur `main` en [Semantic Versioning](https://semver.org/lang/fr/)
+  (`v1.x.y` pour la page d'accueil actuelle, `v2.0.0` pour le nouveau portfolio), voir la section « Versions » du
+  `README.md`.
 - **Formatage** : respecter `.editorconfig` (LF, saut de ligne final, 4 espaces par défaut, 2 pour
   JS/JSON/SCSS/YAML/Markdown).
 
 ## Styles
 
-`style.css` est généré, ne jamais le modifier à la main. Après chaque modification de `style.scss` :
+`public/style.css` est généré, ne jamais le modifier à la main. Après chaque modification de `style.scss` :
 
 ```bash
-npx sass style.scss style.css --style=expanded --no-source-map
+npx sass style.scss public/style.css --style=expanded --no-source-map
 ```
+
+`style.scss` est organisé en sections numérotées (sommaire en tête de fichier) : ranger chaque nouvelle règle dans
+la bonne section, utiliser les couleurs des maps de thème, les mixins et la fonction `tinted()` existants, et
+respecter l'ordre des propriétés indiqué dans l'en-tête.
+
+## Référencement
+
+- Toute modification visible de la page : mettre à jour `<lastmod>` dans `public/sitemap.xml`.
+- Si l'apparence change nettement : régénérer `public/images/og-image.jpg` (capture de la page en thème clair,
+  1200 × 630), utilisée comme aperçu lors des partages.
+- Garder cohérents le `<title>`, la meta description, les balises Open Graph et les données structurées JSON-LD
+  de `public/index.html`.
 
 ## Documentation
 
 - Mettre à jour `ROADMAP.md` quand une tâche est terminée : la déplacer dans « ✅ Fait » sous la date du jour
   (format `JJ/MM/AA`) et actualiser la ligne « Dernière mise à jour ».
-- Mettre à jour la section « Structure du projet » du `README.md` quand un fichier ou un dossier est ajouté à la racine.
+- Mettre à jour la section « Structure du projet » du `README.md` quand un fichier ou un dossier est ajouté à la racine
+  ou dans `public/`.
