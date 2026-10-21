@@ -1,10 +1,21 @@
 # Suivi du projet — Portfolio Valentin Silvestre
 
-Dernière mise à jour : 28/09/26
+Dernière mise à jour : 21/10/26
 
 ## 🚧 En développement
 
 ## ✅ Fait
+
+- **21/10/26**
+    - Mise en ligne du CV sur [valentinsilvestre.com/cv/](https://valentinsilvestre.com/cv/), avec un lien depuis la
+      page d'accueil, une URL canonique et une entrée dans le sitemap
+    - Mise en avant du CV sur la page d'accueil : bouton « Voir mon CV » dans l'en-tête, phrase d'introduction et
+      descriptions (meta, Open Graph) mises à jour, image d'aperçu régénérée
+    - Lien « Retour au portfolio » en haut du CV, masqué à l'impression
+
+- **30/09/26**
+    - Ajout du CV dans le projet (`public/cv`) : page HTML/CSS/JS au format A4, imprimable sur une page, avec alerte en
+      cas de dépassement
 
 - **28/09/26**
     - Mise en place de la redirection `www.valentinsilvestre.com` → `valentinsilvestre.com`
@@ -22,6 +33,8 @@ Dernière mise à jour : 28/09/26
     - Référencement : URL canonique, balises Open Graph avec image d'aperçu, données structurées, `robots.txt`,
       `sitemap.xml` et `noindex` sur les aperçus `*.workers.dev`
     - Mise en place du versionnement des mises en production (Semantic Versioning, tags Git)
+    - Convention de titre et de description des Pull Requests
+    - Protection de la branche `develop` contre la suppression (ruleset GitHub)
 
 - **25/09/26**
     - Installation de Claude Code dans le terminal de PhpStorm

@@ -6,7 +6,7 @@
 //   2. Outils          fonction et mixins réutilisés dans le fichier
 //   3. Thèmes          variables CSS pour le thème clair (défaut) et sombre
 //   4. Base            box-sizing, fond et typographie de la page
-//   5. En-tête         nom, rôle, phrase d'introduction
+//   5. En-tête         nom, rôle, phrase d'introduction, bouton vers le CV
 //   6. Mise en page    conteneur et grille des deux cartes
 //   7. Carte 2022      capture du portfolio 2022 dans un cadre de navigateur
 //   8. Carte avancement  barre de progression et liste des étapes
@@ -161,10 +161,37 @@ h1 {
 }
 
 .subtitle {
-  margin: 0 0 36px;
+  margin: 0 0 24px;
   color: var(--text-dim);
   font-size: 17px;
   line-height: 1.6;
+}
+
+// Bouton principal vers le CV, premier élément cliquable de la page.
+// Texte en --bg-alt : blanc sur l'accent en thème clair, quasi noir sur l'accent plus clair du thème sombre,
+// pour garder un bon contraste dans les deux cas.
+.cta {
+  display: inline-block;
+  margin: 0 0 36px;
+  padding: 12px 28px;
+  border-radius: $radius-pill;
+  background: var(--accent);
+  color: var(--bg-alt);
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 6px 20px tinted(accent, 30%);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    box-shadow: 0 8px 24px tinted(accent, 40%);
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
 }
 
 
