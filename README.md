@@ -36,6 +36,7 @@ Développement du portfolio complet (React + Symfony) à venir, voir [ROADMAP.md
 │   ├── index.html      # Page d'accueil
 │   ├── style.css       # CSS compilé (généré depuis style.scss)
 │   ├── images/         # Capture du portfolio 2022, image d'aperçu pour les réseaux sociaux
+│   ├── cv/             # CV imprimable sur une page A4 (HTML, CSS, JS, images), en ligne sur /cv/
 │   ├── favicon.ico
 │   ├── robots.txt      # Règles pour les robots d'indexation, lien vers le sitemap
 │   ├── sitemap.xml     # Liste des pages à indexer
@@ -77,12 +78,24 @@ Pour recompiler le CSS après une modification de `style.scss` :
 npx sass style.scss public/style.css --style=expanded --no-source-map
 ```
 
+## 📄 CV
+
+Le dossier `public/cv` contient mon CV sous forme de page web au format A4, en ligne sur
+[valentinsilvestre.com/cv/](https://valentinsilvestre.com/cv/) et accessible depuis la page d'accueil. `index.html`
+s'ouvre dans un navigateur et s'imprime (papier ou PDF) sur une seule page, via le bouton « Imprimer / PDF » ou `Ctrl + P`. Dans la boîte de
+dialogue, choisir « Enregistrer au format PDF » (les liens restent cliquables), marges « Aucune » ou « Par défaut » et
+décocher « En-têtes et pieds de page ». Si le contenu dépasse la page, la feuille est encadrée en rouge et un message
+s'affiche à l'écran.
+
+Les styles sont écrits directement en CSS (`public/cv`), sans Sass : aucune compilation n'est nécessaire.
+
 ## 🔍 Référencement (SEO)
 
 - **Balises de la page** (`public/index.html`) : titre, description, URL canonique vers `valentinsilvestre.com`,
   balises Open Graph et Twitter pour l'aperçu lors d'un partage (image `images/og-image.jpg`, 1200 × 630),
   couleur de thème mobile et données structurées [`Person`](https://schema.org/Person) (JSON-LD).
-- **`robots.txt` et `sitemap.xml`** : autorisent l'indexation et listent la page d'accueil. Cloudflare ajoute
+- **CV** (`public/cv/index.html`) : titre, description et URL canonique vers `valentinsilvestre.com/cv/`.
+- **`robots.txt` et `sitemap.xml`** : autorisent l'indexation et listent la page d'accueil et le CV. Cloudflare ajoute
   automatiquement en tête du `robots.txt` ses « content signals » destinés aux robots d'IA.
 - **Aperçus non indexés** : `_headers` ajoute `X-Robots-Tag: noindex` sur les domaines `*.workers.dev`, pour que
   seule la production apparaisse dans les moteurs de recherche.

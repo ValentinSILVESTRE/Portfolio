@@ -1,0 +1,367 @@
+/* =============================================================================
+   CV — Valentin SILVESTRE
+
+   La page est une feuille A4 de taille fixe : à l'écran elle est centrée sur un fond gris, à l'impression elle
+   occupe exactement une page (marges gérées par la feuille elle-même, pas par l'imprimante). Les dimensions
+   sont en points (pt), l'unité de l'impression : 1pt = 1/72 de pouce.
+
+   Sommaire
+     1. Réglages          format de la page, couleurs, tailles (variables CSS)
+     2. Base              box-sizing, typographie, liens
+     3. Barre d'outils    bouton d'impression et alerte de dépassement (écran uniquement)
+     4. Feuille           format A4 et grille des deux colonnes
+     5. Éléments communs  titres de section et lignes icône + texte
+     6. Colonne gauche    nom, coordonnées, compétences, langues
+     7. Colonne droite    intitulé, photo, expériences, diplômes et formations
+     8. Impression        réglages propres à l'impression
+
+   Ordre des propriétés dans chaque règle :
+     position → affichage → dimensions → espacements → bordure → fond → texte → effets
+   ============================================================================= */
+
+
+/* -----------------------------------------------------------------------------
+   1. Réglages
+   ----------------------------------------------------------------------------- */
+
+:root {
+  --page-width: 210mm;
+  --page-height: 297mm;
+  --page-padding: 45pt;
+
+  --sidebar-width: 190pt;
+  --column-gap: 16pt;
+  --photo-width: 87pt;
+  --photo-height: 116pt;
+
+  --color-text: #000;
+  --color-text-dim: #555;
+  --color-sidebar-bg: rgb(199, 197, 200);
+  --color-screen-bg: #e5e7eb;
+  --color-warning: #b42318;
+
+  --font-family: "Times New Roman", Times, serif;
+  --font-size-base: 9pt;
+  --font-size-title: 13.5pt;
+  --font-size-heading: 21pt;
+  --icon-size: 13.7pt;
+}
+
+
+/* -----------------------------------------------------------------------------
+   2. Base
+   ----------------------------------------------------------------------------- */
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 16pt 0;
+  background: var(--color-screen-bg);
+  color: var(--color-text);
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  line-height: 1.2;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* -----------------------------------------------------------------------------
+   3. Barre d'outils
+   ----------------------------------------------------------------------------- */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12pt;
+  margin-bottom: 12pt;
+  font-family: system-ui, sans-serif;
+}
+
+/* Retour à l'accueil, discret pour laisser l'impression comme action principale. */
+.toolbar__back {
+  color: #374151;
+  font-size: 10pt;
+}
+
+.toolbar__back:hover {
+  text-decoration: underline;
+}
+
+.toolbar__print {
+  padding: 6pt 12pt;
+  border: 1px solid #9ca3af;
+  border-radius: 6pt;
+  background: #fff;
+  font: inherit;
+  font-size: 10pt;
+  cursor: pointer;
+}
+
+.toolbar__print:hover {
+  background: #f3f4f6;
+}
+
+.toolbar__warning {
+  color: var(--color-warning);
+  font-size: 10pt;
+  font-weight: 600;
+}
+
+
+/* -----------------------------------------------------------------------------
+   4. Feuille
+   ----------------------------------------------------------------------------- */
+
+/* Dimensions fixes : si le contenu dépasse, il est masqué (et signalé par script.js) plutôt que de créer
+   une deuxième page à l'impression. Pas de marge intérieure ici : le fond gris de la colonne gauche va jusqu'au
+   bord de la feuille, les marges sont portées par chaque colonne. */
+.page {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  width: var(--page-width);
+  height: var(--page-height);
+  margin: 0 auto;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2pt 12pt rgba(0, 0, 0, 0.15);
+}
+
+.page.is-overflowing {
+  outline: 2pt solid var(--color-warning);
+}
+
+
+/* -----------------------------------------------------------------------------
+   5. Éléments communs
+   ----------------------------------------------------------------------------- */
+
+.title {
+  margin-bottom: 10pt;
+  font-size: var(--font-size-title);
+  font-weight: bold;
+}
+
+/* Ligne icône + texte (coordonnées et compétences). */
+.item {
+  display: flex;
+  align-items: center;
+  gap: 8pt;
+  margin-bottom: 5pt;
+  overflow-wrap: anywhere;
+}
+
+.item__icon {
+  flex-shrink: 0;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  object-fit: contain;
+}
+
+
+/* -----------------------------------------------------------------------------
+   6. Colonne gauche
+   ----------------------------------------------------------------------------- */
+
+/* Fond gris sur toute la hauteur ; print-color-adjust force son impression (les navigateurs omettent les
+   arrière-plans par défaut pour économiser l'encre). */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: var(--page-padding) 14pt var(--page-padding) 30pt;
+  background: var(--color-sidebar-bg);
+  print-color-adjust: exact;
+}
+
+.sidebar__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 88pt;
+}
+
+.name {
+  font-size: var(--font-size-heading);
+  line-height: 1.15;
+  text-align: center;
+}
+
+.contact {
+  margin: 8pt 0 14pt;
+}
+
+.contact .item {
+  gap: 5pt;
+  margin-bottom: 6pt;
+}
+
+.skills {
+  margin-bottom: 9pt;
+}
+
+.skills:last-child {
+  margin-bottom: 0;
+}
+
+/* Compétences sur deux colonnes pour garder de la place dans la colonne gauche. */
+.skills__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 6pt;
+}
+
+.skills__grid .item {
+  gap: 5pt;
+}
+
+.languages .item {
+  gap: 6pt;
+}
+
+.flag {
+  flex-shrink: 0;
+  width: var(--icon-size);
+  height: 9pt;
+  object-fit: cover;
+}
+
+
+/* -----------------------------------------------------------------------------
+   7. Colonne droite
+   ----------------------------------------------------------------------------- */
+
+.content {
+  padding: var(--page-padding) var(--page-padding) var(--page-padding) var(--column-gap);
+}
+
+.content .title {
+  margin-bottom: 8pt;
+}
+
+.content__header {
+  display: flex;
+  align-items: center;
+  height: var(--photo-height);
+  margin-bottom: 8pt;
+}
+
+.job {
+  flex: 1;
+  text-align: center;
+}
+
+.job__title {
+  font-size: var(--font-size-heading);
+  font-weight: bold;
+  line-height: 1.15;
+}
+
+.job__stack {
+  margin-top: 6pt;
+  color: var(--color-text-dim);
+  font-size: 11pt;
+}
+
+.photo {
+  width: var(--photo-width);
+  height: var(--photo-height);
+  border: 0.75pt solid #333;
+  object-fit: cover;
+}
+
+.profile,
+.timeline {
+  margin-bottom: 14pt;
+}
+
+/* La dernière section n'a pas de marge : celle de la page suffit, et elle ferait déborder la feuille. */
+.timeline:last-child {
+  margin-bottom: 0;
+}
+
+.profile p {
+  padding-left: 10pt;
+}
+
+.timeline ul {
+  padding-left: 10pt;
+}
+
+/* Date à gauche, intitulé à droite ; l'intitulé peut tenir sur plusieurs lignes. */
+.entry {
+  display: grid;
+  grid-template-columns: 63pt 1fr;
+  margin-bottom: 6pt;
+}
+
+.entry__role {
+  font-weight: bold;
+}
+
+/* Missions d'une expérience : liste à puces, technologies en italique en dessous. */
+.tasks {
+  margin-top: 3pt;
+  padding-left: 10pt;
+  list-style: disc;
+}
+
+.tasks li {
+  margin-bottom: 2pt;
+}
+
+.tech {
+  display: block;
+  margin-top: 2pt;
+  color: var(--color-text-dim);
+  font-style: italic;
+}
+
+/* Lien dans le texte : souligné en pointillés pour rester discret à l'impression. */
+.entry__link {
+  text-decoration: underline dotted;
+}
+
+
+/* -----------------------------------------------------------------------------
+   8. Impression
+   ----------------------------------------------------------------------------- */
+
+/* Feuille A4 sans marge d'imprimante : les marges sont celles de .page. Penser à décocher « En-têtes et pieds de
+   page » dans la boîte de dialogue du navigateur. */
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  body {
+    padding: 0;
+    background: none;
+  }
+
+  .toolbar {
+    display: none;
+  }
+
+  /* 1px de marge de sécurité : un arrondi du navigateur sur 297mm peut sinon créer une deuxième page blanche. */
+  .page {
+    height: calc(var(--page-height) - 1px);
+    margin: 0;
+    box-shadow: none;
+    outline: none;
+  }
+}
