@@ -12,6 +12,7 @@ Dernière mise à jour : 21/10/26
     - Mise en avant du CV sur la page d'accueil : bouton « Voir mon CV » dans l'en-tête, phrase d'introduction et
       descriptions (meta, Open Graph) mises à jour, image d'aperçu régénérée
     - Lien « Retour au portfolio » en haut du CV, masqué à l'impression
+    - Mise en production `v1.1.0`, et ajout à la procédure de release de la remise à jour de `develop` avec `main`
 
 - **30/09/26**
     - Ajout du CV dans le projet (`public/cv`) : page HTML/CSS/JS au format A4, imprimable sur une page, avec alerte en

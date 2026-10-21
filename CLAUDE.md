@@ -54,7 +54,8 @@ Le [README.md](./README.md) décrit le projet, la stack et les conventions ; [RO
   et une description prête à coller.
 - **Versions** : chaque mise en production est taguée sur `main` en [Semantic Versioning](https://semver.org/lang/fr/)
   (`v1.x.y` pour la page d'accueil actuelle, `v2.0.0` pour le nouveau portfolio), voir la section « Versions » du
-  `README.md`.
+  `README.md`. Après le tag, remettre `develop` à jour avec `main` (avance rapide sur le merge commit de release) :
+  `git switch develop && git pull && git merge --ff-only main && git push origin develop`.
 - **Formatage** : respecter `.editorconfig` (LF, saut de ligne final, 4 espaces par défaut, 2 pour
   JS/JSON/SCSS/YAML/Markdown).
 

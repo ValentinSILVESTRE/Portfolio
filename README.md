@@ -194,13 +194,24 @@ Versions majeures du projet :
 - `v1` — page d'accueil présentant le portfolio 2022 et l'avancement du nouveau portfolio
 - `v2` — nouveau portfolio complet (React + Symfony), à venir
 
-Procédure, une fois la Pull Request `develop` → `main` fusionnée :
+Procédure, une fois la Pull Request `develop` → `main` fusionnée (avec un merge commit dont le message est
+`release: vX.Y.Z`) :
 
-```bash
-git switch main && git pull
-git tag -a v1.0.0 -m "Short description of the release"
-git push origin v1.0.0
-```
+1. Taguer la version sur `main` :
+
+   ```bash
+   git switch main && git pull
+   git tag -a v1.0.0 -m "Short description of the release"
+   git push origin v1.0.0
+   ```
+
+2. Remettre `develop` à jour avec `main` : le merge commit `release: vX.Y.Z` n'existe que sur `main`. Sans cette
+   étape, les deux branches divergent un peu plus à chaque mise en production. L'avance rapide (`--ff-only`) ne
+   réécrit rien, car `main` contient déjà tout `develop` :
+
+   ```bash
+   git switch develop && git pull && git merge --ff-only main && git push origin develop
+   ```
 
 Une Release GitHub peut ensuite être créée à partir du tag (*Releases → Draft a new release*), avec des notes
 générées automatiquement depuis les commits (*Generate release notes*).
